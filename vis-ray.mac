@@ -1,0 +1,9 @@
+# vis file to draw the geometry by using RayTracer
+# if you want to do it interactively, use /vis/open RayTracerX
+/vis/open RayTracerX
+/vis/drawVolume
+#/vis/viewer/set/viewpointThetaPhi 50 -20
+#/vis/viewer/set/viewpointThetaPhi 50 20
+/vis/viewer/set/viewpointThetaPhi 90 0
+/vis/viewer/set/background 1 1 1
+/vis/viewer/refresh

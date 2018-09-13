@@ -1,0 +1,48 @@
+## control for detector
+/Gamma/det/setCryMaterial CsI
+#/Gamma/det/setCryMaterial Pb
+#layer1,2の内径？？
+/Gamma/det/setInRad 20 cm   
+/Gamma/det/setArrayPos 0. 0. -4497.14 mm
+/Gamma/det/setLaBrPos 0. 0. 178.22 mm
+#
+## Control Physics related things
+/Gamma/phys/addPhysics local
+# Default value: These cuts change the contribution of X-ray escape
+# Reasonable for CsI
+#/Gamma/phys/SetGCut 300 um
+/Gamma/phys/SetGCut 1000 um
+/Gamma/phys/SetECut  5 um
+/Gamma/phys/SetPCut  5 um
+#
+/run/initialize
+/process/em/deexcitation Array true true true
+/process/em/pixe true
+/process/em/auger true
+#
+# control for the primary generator action
+/Gamma/primary/setNumGammas 1
+# /Gamma/primary/setEgamma1 0.511 MeV
+#/Gamma/primary/setEgamma1 1.275 MeV
+#/Gamma/primary/setEgamma1 0.662 MeV
+#/Gamma/primary/setEgamma1 1.173 MeV
+#/Gamma/primary/setEgamma1 1.333 MeV
+# /Gamma/primary/setEgamma1 0.898 MeV
+# /Gamma/primary/setEgamma1 1.836 MeV
+
+#Ne30 2+
+/Gamma/primary/setEgamma1 0.792 MeV 
+#/Gamma/primary/setEgamma1 0.805 MeV  # +14mm ver.
+
+#Ne32 2+,(4+)
+#/Gamma/primary/setEgamma1 0.700 MeV 
+#/Gamma/primary/setEgamma1 1.449 MeV 
+
+/Gamma/primary/setBeamBeta 0.6147
+#/Gamma/primary/setBeamBeta 0.0
+
+
+# control for root file
+#/Gamma/root/setFileName ./root/simucat_cs.root
+/Gamma/root/setFileName ./root/simucat.root
+#/Gamma/root/setFileName ./root/test.root

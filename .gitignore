@@ -1,0 +1,8 @@
+*.wrl
+*~
+root/
+anashikiroot/
+*.ps
+*.eps
+bin/
+tmp/

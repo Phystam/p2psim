@@ -1,0 +1,16 @@
+#ifndef TTarget_H
+#define TTarget_H 1
+
+#include "TDetector.hh"
+#include "globals.hh"
+#include "CalorimeterSD.hh"
+#include "G4ThreeVector.hh"
+
+class G4Trd;
+//class G4Trap;                                                                                                                                                    
+//class G4SubtractionSolid;                                                                                                                                        
+class G4LogicalVolume;
+class G4VPhysicalVolume;
+class G4VisAttributes;
+class DetectorConstruction;
+

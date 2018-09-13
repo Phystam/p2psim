@@ -1,0 +1,134 @@
+// definition of materials
+#include "G4PhysicalConstants.hh"
+void MaterialManager::DefineMaterials()
+{
+  
+  // Elements ========================================================
+
+  G4double A,Z;
+  G4String name, symbol;
+  
+  A = 1.00794 *g/mole;
+  G4Element *elH = new G4Element(name="Hydrogen", symbol="H", Z=1., A);
+
+  A = 12.011 *g/mole;
+  G4Element *elC = new G4Element(name="Carbon", symbol="C", Z=6., A);
+
+  A = 14.00674 *g/mole;
+  G4Element *elN = new G4Element(name="Nitrogen", symbol="N", Z=7., A);
+
+  A = 15.9994 *g/mole;
+  G4Element *elO = new G4Element(name="Oxygen", symbol="O", Z=8., A);
+
+  A = 132.9054519 *g/mole;
+  G4Element *elCs = new G4Element(name="Cesium", symbol="Cs", Z=55., A);
+
+  A = 126.90447 *g/mole;
+  G4Element *elI = new G4Element(name="iodine", symbol="I", Z=53., A);
+
+  A = 208.98038 *g/mole;
+  G4Element *elBi = new G4Element(name="Bismuth",symbol="Bi", Z=83., A);
+
+  A = 72.64 *g/mole;
+  G4Element *elGe = new G4Element(name="Germanium", symbol="Ge", Z=32., A);
+
+  A = 22.989769*g/mole;
+  G4Element *elNa = new G4Element(name="Sodium", symbol="Na", Z=11., A);
+
+  A = 79.904*g/mole;
+  G4Element *elBr = new G4Element(name="Bromine", symbol="Br",Z=35.,A);
+
+  A = 138.9055*g/mole;
+  G4Element *elLa = new G4Element(name="Lanthanum", symbol="La",Z=57.,A);
+
+  A = 24.305*g/mole;
+  G4Element *elMg = new G4Element(name="Magnesium", symbol="Mg",Z=12.,A);
+
+  A = 39.948*g/mole;
+  G4Element *elAr = new G4Element(name="Argon", symbol="Ar",Z=18.,A);
+
+  // Elements end... =================================================
+
+  // Materials =======================================================
+
+  G4double density, massfraction;
+  G4int natoms, nel;
+
+  // temperture of expHall 20degree
+  const G4double expTemp = STP_Temperature + 20. *kelvin;
+
+  //air
+  density = 1.205e-03 *g/cm3; //at 20 degree
+  G4Material *Air = new G4Material(name="Air", density, nel=2, 
+				   kStateGas,expTemp);
+  Air -> AddElement(elN, massfraction=70. *perCent);
+  Air -> AddElement(elO, massfraction=30. *perCent);
+
+  // Vacuum
+  density = universe_mean_density;
+  G4double pressure = 3.e-18*pascal;
+  G4double temperature = 2.73*kelvin;
+  G4Material *Vacuum = new G4Material(name="Vacuum",Z=1,A=1.01*g/mole,
+				      density, kStateGas, temperature,
+				      pressure);
+  // Pb (natural)
+  density = 11.35 *g/cm3;
+  G4Material *Pb = new G4Material(name="Pb", Z=82., A=207.2*g/mole,
+				  density);
+
+  // Silicon
+  density = 2.34 *g/cm3;
+  G4Material *Si = new G4Material(name="Si", Z=14., A=28.0855*g/mole,
+				  density);
+    
+  // Plastic Scinti. (C6H5CH=CH2)
+  density = 1.032 *g/cm3; // from Leo book p160.
+  G4Material *Scinti = new G4Material(name="Scinti", density, nel=2);
+  Scinti -> AddElement(elH,natoms=8);
+  Scinti -> AddElement(elC,natoms=8);
+
+  //Alumi
+  density = 2.69 *g/cm3;
+  G4Material *Al = new G4Material(name="Al", Z=13., A=26.981539*g/mole,
+				  density);
+
+  //CsI crystal
+  density = 4.51 *g/cm3;
+  G4Material *CsICrystal = new G4Material(name="CsI", density, nel=2);
+  CsICrystal -> AddElement(elCs,natoms=1);
+  CsICrystal -> AddElement(elI ,natoms=1);
+
+  //BGO crystal
+  density = 7.13 *g/cm3;
+  G4Material *BGOCrystal = new G4Material(name="BGO", density, nel=3);
+  BGOCrystal -> AddElement(elBi,natoms=4);
+  BGOCrystal -> AddElement(elGe,natoms=3);
+  BGOCrystal -> AddElement(elO, natoms=12);
+
+  //NaI crystal
+  density = 3.67 *g/cm3;
+  G4Material *NaICrystal = new G4Material(name="NaI", density, nel=2);
+  NaICrystal -> AddElement(elNa,natoms=1);
+  NaICrystal -> AddElement(elI ,natoms=1);
+
+  // MgO
+  density = 3.65*g/cm3;
+  G4Material *MgO = new G4Material(name="MgO", density, nel=2);
+  MgO->AddElement(elMg,natoms=1);
+  MgO->AddElement(elO,natoms=1);
+
+  // LaBr3
+  density = 5.08*g/cm3;
+  G4Material *LaBr3 = new G4Material(name="LaBr3", density, nel=2);
+  LaBr3->AddElement(elLa,natoms=1);
+  LaBr3->AddElement(elBr,natoms=3);
+
+  // P10gas
+  density = 1.298*1.293*kg/m3;
+  G4Material *P10 = new G4Material(name="P10", density, nel=3);
+  P10->AddElement(elC,natoms=1);
+  P10->AddElement(elH,natoms=4);
+  P10->AddElement(elAr,natoms=9);
+}
+
+  

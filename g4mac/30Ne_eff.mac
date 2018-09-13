@@ -1,0 +1,7 @@
+/action/file/OverWrite n
+/action/file/RunName catana
+/action/file/SaveDirectory root/brho_func/
+/action/gun/Type Tree
+#/action/gun/tree/InputFileName input_Pb0249_9.root
+#/action/gun/tree/TreeName tree_input
+/action/gun/tree/beamOn 1000000
