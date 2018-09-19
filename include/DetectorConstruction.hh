@@ -17,6 +17,7 @@
 // detector or material to be used in the DetectorConstruction
 #include "TCATANA.hh"
 #include "TLaBr3Array.hh"
+#include "CalorimeterSD.hh"
 
 class G4Box;
 class G4LogicalVolume;
@@ -42,6 +43,8 @@ private:
   G4String fDetMaterialName;
   G4ThreeVector fArrayPos;
   G4ThreeVector fLaBrPos;
+  CalorimeterSD *fArraySD;
+  
 public:
   DetectorConstruction();
   ~DetectorConstruction();

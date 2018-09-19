@@ -4,6 +4,7 @@
 #include "DetectorConstruction.hh"
 #include "MaterialManager.hh"
 
+#include "G4SDManager.hh"
 #include "G4LogicalVolume.hh"
 #include "G4PVPlacement.hh"
 #include "G4ThreeVector.hh"
@@ -80,14 +81,54 @@ G4VPhysicalVolume *DetectorConstruction::Construct()
   fCATANA->Spec();
   fCATANA->Build();
   
+  //LaBr3s ===========================================================
 
   //  fLaBr3Array = new TLaBr3Array(this);
   //  fLaBr3Array->SetArrayPosition(fLaBrPos);
   //  fLaBr3Array->Spec();
   //  fLaBr3Array->Build();
 
+  // Si trackers ====================================================
+  G4double tgt_center_z= TARGETPOS;
 
- 
+  G4Material* Si = materialMgr->GetMaterial("Si");
+  G4double SiX = 50.*mm;
+  G4double SiY = 50.*mm;
+  G4double SiZ = 50.*um;
+  const G4int numz = 2;
+  G4double zplane[]={0.*mm, 50.*mm};
+  G4double rinner[]={100.*mm,50.*mm};
+  G4double router[]={100.1*mm,50.1*mm};
+  //  G4Box* SiBox = new G4Box("SiBox", SiX, SiY, SiZ);
+  G4Polyhedra* SiPoly = new G4Polyhedra("SiPoly",0,360.*deg,6,numz,zplane,rinner,router);
+
+  G4LogicalVolume* SiLV = new G4LogicalVolume(SiPoly, Si, "SiLV", 0, 0, 0);
+
+  // //rotation  
+   G4RotationMatrix* rotCounter = new G4RotationMatrix;
+   rotCounter->rotateY(0.*deg);
+  // //position
+   G4ThreeVector xyzCounter(0.,0.,tgt_center_z+50.*mm);
+  // //transform
+   G4Transform3D posCounter(*rotCounter,xyzCounter);
+
+  G4PVPlacement* SiTracker = new G4PVPlacement(posCounter,"SiTracker",SiLV,physiExpHall,FALSE,0);
+
+  //Register to Sensitive Detector
+
+  G4SDManager *SDman = G4SDManager::GetSDMpointer();
+  static int init2=1;
+  if(init2){
+    fArraySD = new CalorimeterSD("SiSD",
+  				 "SiCollection",
+  				 1);
+    SDman->AddNewDetector(fArraySD);
+
+    SiLV->SetSensitiveDetector(fArraySD);
+    init2 = 0;
+  }
+
+
   // Chambers? ======================================================
   {
     // G4Material *Al = materialMgr->GetMaterial("Al");
@@ -207,7 +248,7 @@ G4VPhysicalVolume *DetectorConstruction::Construct()
 
 
   //  G4double tgt_center_z= 26.2*mm;
-  G4double tgt_center_z= TARGETPOS;
+
   // //for source run ===============================================
 
   // G4RotationMatrix* rotCounter_tgtholder = new G4RotationMatrix;

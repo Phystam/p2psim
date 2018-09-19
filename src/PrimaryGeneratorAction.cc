@@ -213,10 +213,11 @@ TLorentzVector proton[2];
     fParticleGun->SetParticlePosition(beamPos);
     fParticleGun->SetParticleMomentumDirection(beamDir[i].unit());
     fParticleGun->SetParticleEnergy((proton[i].E()-proton[i].M())*MeV);
+    //    fParticleGun->SetParticleEnergy(100.*MeV);
     fParticleGun -> GeneratePrimaryVertex(anEvent);
- std::cout << proton[i].Px()<<" "<<proton[i].Py() << " " << proton[i].Pz() <<" "<< proton[i].E()-proton[i].M() << std::endl;     
+    std::cout << proton[i].Px()<<" "<<proton[i].Py() << " " << proton[i].Pz() <<" "<< proton[i].E()-proton[i].M() << std::endl;     
     //    runAction->SettEGammaCM(gammaE[i],i);
- runAction->SettEGamma((proton[i].E()-proton[i].M())*MeV, i);
+    runAction->SettEGamma((proton[i].E()-proton[i].M())*MeV, i);
     runAction->SettPosGamma(beamPos, i);
     runAction->SettDirGamma(beamDir[i].unit(),i);
   }

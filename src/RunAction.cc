@@ -133,6 +133,8 @@ void RunAction::DefineBranch()
   t1->Branch("SourceY",&tSourceY);
   t1->Branch("SourceZ",&tSourceZ);
 
+
+  t1->Branch("TrackerPos","TVector3",&tTrackerPos);
   /*
   t1->Branch("NumHitLaBr",&tNumHitLaBr, "NumHitLaBr/I");
   t1->Branch("EdepLaBr",&tEdepLaBr);
