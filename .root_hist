@@ -1,477 +1,428 @@
-fit("fit","","",500,800)
-N=9.56738e+04/5.
-N/100000.
-E=7.19893e+02/5.
-E/100000.
-E/100000.*100.
-N/100000.*100.
+ht(2,"same")
+t1->Draw("Edep-EGamma>>h(400,-200,200)","Edep!=0")
+lgy()
 .q
-.x macros/readtree.cc++g
-TF1* fit=new TF1("fit","expo(0)+gausn(2)")
-fit->SetParameters( 1.13596e+01, -1.31131e-02,1.40996e+03,6.61280e+02,2.75525e+01)
+TFile *_file0 = TFile::Open("root/simucat.root")
+ls()
+.ls
+t1->Show(1)
+t1->Draw("TrackerPos.X():TrackerPos.Y()","","colz")
+t1->Draw("EGamma","","colz")
+t1->Draw("EGamma:Edep","","colz")
+t1->Draw("Edep:EGamma>>h(100,0,400,100,0,400),","","colz")
+t1->Draw("Edep:EGamma>>h(100,0,400,100,0,400),","EGamma!=0","colz")
+t1->Draw("TotalEdep:EGamma>>h(100,0,400,100,0,400),","EGamma!=0","colz")
+t1->Draw("Edep:EGamma>>h(100,0,400,100,0,400),","EGamma!=0","colz")
+t1->Draw("Edep:EGamma>>h(200,0,400,200,0,400),","EGamma!=0","colz")
+.q
+TFile *_file0 = TFile::Open("root/simucat.root")
+.ls
+t1->Show(1)
+t1->Draw("TrackerPos.X():TrackerPoz.Y()","","colz
+")
+t1->Draw("TrackerPos.X():TrackerPoz.Y()","","colz")
+t1->Draw("TrackerPos.X():TrackerPos.Z()","","colz")
+t1->Draw("TrackerPos.X():TrackerPos.Y()","","colz")
+t1->Draw("TrackerPos.X():TrackerPos.Y()>>h(100,-300,300,-300,300)","","colz")
+t1->Draw("TrackerPos.X():TrackerPos.Y()>>h(100,-300,300,100,-300,300)","","colz")
+t1->Draw("TrackerPos.X():TrackerPos.Z()>>h(100,-300,300,100,-300,300)","","colz")
+t1->Draw("TrackerPos.X():TrackerPos.Z()>>h(100,-300,300,100,-4900,-4400)","","colz")
+t1->Draw("TrackerPos.X():TrackerPos.Z()>>h(100,-4900,-4300,100,-300,300)","","colz")
+t1->Draw("TrackerPos.X():TrackerPos.Z()>>h(100,-4500,-4300,100,-300,300)","","colz")
+t1->Draw("TrackerPos.X():TrackerPos.Z()>>h(100,-4500,-4200,100,-300,300)","","colz")
+.q
+TFile *_file0 = TFile::Open("root/simucat.root")
+t1->Draw("TrackerPos.X():TrackerPos.Z()>>h(100,-4500,-4300,100,-300,300)","","colz")
+t1->Draw("TrackerPos.X():TrackerPos.Z()>>h(100,-4600,-4300,100,-300,300)","","colz")
+t1->Draw("TrackerPos.Y():TrackerPos.X()>>h(100,-300,300,100,-300,300)","","colz")
+t1->MakeClass("readtree")
+.q
+TFile *_file0 = TFile::Open("root/simucat.root")
+t1->Draw("TrackerPos.Y():TrackerPos.X()>>h(100,-300,300,100,-300,300)","","colz")
+t1->Show(1)
+t1->Draw("DetXSi.Y():DetYSi.X()>>h(100,-300,300,100,-300,300)","","colz")
+t1->Draw("DetXSi:DetYSi>>h(100,-300,300,100,-300,300)","","colz")
+t1->Draw("DetXSi:DetYSi>>h(100,-200,200,100,-200,200)","","colz")
+t1->Draw("DetXSi.size():DetYSi>>h(100,-200,200,100,-200,200)","","colz")
+t1->Draw("(int)DetXSi->size():DetYSi>>h(100,-200,200,100,-200,200)","","colz")
+t1->Draw("DetXSi->size():DetYSi>>h(100,-200,200,100,-200,200)","","colz")
+t1->Draw("DetXSi.size():DetYSi>>h(100,-200,200,100,-200,200)","","colz")
+t1->Draw("DetXSi.size():DetYSi.size()>>h(100,-200,200,100,-200,200)","","colz")
+t1->Draw("DetXSi:DetYSi>>h(100,-200,200,100,-200,200)","","colz")
+.q
+t1->Draw("DetXSi:DetYSi>>h(100,-200,200,100,-200,200)","","colz")
+.q
+TFile *_file0 = TFile::Open("root/simucat.root")
+t1->MakeClass("readtree2")
+.q
+.L readtree2.C
+readtree2 readtree2
+readtree2.Loop()
+.q
+.q
+.L readtree2.C
+readtree2 l
+l.Loop()
+.q
+.L readtree2.C
+l.Loop()
+readtree2 l
+l.Loop()
+.q
+.L readtree2.C
+l.Loop()
+readtree2 l
+l.Loop()
+q
+.q
+TFile *_file0 = TFile::Open("root/simucat.root")
+t1->Show(1)
+t1->Draw("NumHitSi")
+t1->Draw("NumHitSi>>h(3,-0.5,2.5)")
+print()
+.!lpr c1.ps
+t1->Draw("NumHit>>h(3,-0.5,2.5)")
+t1->Draw("NumHit>>h(4,-0.5,3.5)")
+t1->Draw("NumHit>>h(5,-0.5,4.5)")
+print()
+.!lpr c1.ps
+.q
+TFile *_file0 = TFile::Open("root/simucat.root")
+.q
+TFile *_file0 = TFile::Open("root/simucat.root")
+t1->Draw("DetIDSi>>h(6,-0.5,5.5)")
+make
+.q
+TFile *_file0 = TFile::Open("root/simucat.root")
+t1->Draw("DetIDSi>>h(6,-0.5,5.5)")
+t1->Draw("DetIDSi>>h(6,0.5,6.5)")
+t1->Draw("DetIDSi>>h(7,-0.5,6.5)")
+print()
+.!lpr c1.ps
+t1->Draw("NumHit>>h(5,-0.5,4.5)")
+t1->Draw("NumHitSi>>h(5,-0.5,4.5)")
+print()
+.!lpr c1.ps
+t1->MakeClass("readtree3")
+.q
+TFile *_file0 = TFile::Open("root/simucat.root")
+t1->Draw("Edep>>h(100,0,400)")
+t1->Draw("Edep_sm>>h(100,0,400)")
+t1->Draw("Edep_sm:Edep>>h(100,0,400,100,0,400)")
+t1->Draw("Edep_sm:Edep>>h(100,0,400,100,0,400)","","colz")
+t1->Draw("Edep_sm:Edep>>h(100,0,400,100,0,400)","Edep!=0","colz")
+t1->Draw("Edep_sm:Edep>>h(100,0,400,100,-100,400)","Edep!=0","colz")
+.q
+.L readtree3.C
+readtree3 l
+l.Loop()
+.q
+.L readtree3.C
+readtree3 l
+l.Loop()
+.q
+.L readtree3.C
+readtree3 l
+l.Loop()
+.q
+.L readtree3.C
+readtree3 l
+l.Loop()
+.q
+.L readtree3.C
+readtree3 l
+l.Loop()
+.q
+.L readtree3.C
+readtree3 l
+l.Loop()
+.q
+.L readtree3.C
+l.Loop()
+readtree3 l
+l.Loop()
+.q
+l.Loop()
+.L readtree3.C
+readtree3 l
+l.Loop()
+.q
+.L readtree3.C
+readtree3 l
+l.Loop()
+.q
+.L readtree3.C
+readtree3 l
+l.Loop()
+.q
+.L readtree3.C
+readtree3 l
+l.Loop()
+.q
+.L readtree3.C
+readtree3 l
+l.Loop()
+.q
+.L readtree3.C
+l.Loop()
+readtree3 l
+l.Loop()
+.q
+.L readtree3.C++g
+.q
+.L readtree3.C++g
+readtree3 l
+l.Loop()
+.q
+.L readtree3.C++g
+.q
+.L readtree3.C++g
+.q
+.L readtree3.C++g
+readtree3 l
+l.Loop()
+.q
+.L readtree3.C++g
+readtree3 l
+l.Loop()
+.q
+readtree3 l
+.L readtree3.C++g
+readtree3 l
+l.Loop()
+.q
+.L readtree3.C++g
+readtree3 l
+l.Loop()
+ls()
+hn()
+.q
+readtree3 l
+.L readtree3.C++g
+readtree3 l
+l.Loop()
+hn()
+.q
+.L readtree3.C++g
+readtree3 l
+l.Loop()
+ls()
+.q
+.L readtree3.C++g
+readtree3 l
+l.Loop()
+ls()
+ht(2)
+.q
+.L readtree3.C++g
+readtree3 l
+l.Loop()
+ls()
+ht(3)
+pry()
+print()
+.!lpr c1.sp
+.!lpr c1.ps
+.q
+.L readtree3.C++g
+.L readtree3.C++g
+readtree3 l
+l.Loop()
+ls()
+ht(3)
+.q
+.L readtree3.C++g
+readtree3 l
+l.Loop()
 ls()
 ht(3)
 hn()
-hn()
-hn()
-TF1* fit=new TF1("fit","expo(0)+gausn(2)")
-fit->SetParameters( 1.13596e+01, -1.31131e-02,1.40996e+03,6.61280e+02,2.75525e+01)
-fit("fit","","",500,800)
-N=9.4655e+04/5.
-7.2686e2/5.
-N/10000.
-N/1000.
-N/1000.*0.942
 .q
-.x macros/readtree.cc++g
-TF1* fit=new TF1("fit","expo(0)+gausn(2)")
+.L readtree3.C++g
+readtree3 l
+l.Loop()
+ls()
+ht(1)
+atan2(6,4)
+atan2(6,4)*180./TMath::Pi()
+90.-atan2(6,4)*180./TMath::Pi()
+10*2/sqrt(3)
+11.55/2
+4*2/sqrt(3)
+4*2/sqrt(3)/2
+sqrt(6*6+4*4)
+90.-atan2(6,4)*180./TMath::Pi()
+-atan2(6,4)*180./TMath::Pi()
+.q
+.L readtree3.C++g
+readtree3 l
+l.Loop()
+ls()
+ht(1)
+t1->Show(1)
+t1->Draw("Edep")
+t1->Draw("Edep:Edep_sm")
+t1->Draw("Edep_sm:Edep>>h(100,0,400,100,0,400)","","colz")
+t1->Draw("Edep_sm:Edep>>h(200,0,400,200,0,400)","","colz")
+t1->Draw("Edep_sm:Edep>>h(400,0,400,400,0,400)","","colz")
+print()
+.!lpr c1.ps
+t1->Draw("Edep")
+t1->Draw("Edep:EGamma>>h2(400,0,400,400,0,400)","","colz")
+t1->Draw("Edep:EGamma>>h2(200,0,400,200,0,400)","","colz")
+t1->Draw("Edep:EGamma>>h2(200,0,400,200,0,400)","EGamma!=0","colz")
+print()
+.!lpr c1.ps
+t1->Draw("Edep_sm:EGamma>>h2(200,0,400,200,0,400)","EGamma!=0","colz")
+print()
+.!lpr c1.ps
+.q
+ls()
+.L readtree3.C++g
+readtree3 l
+l.Loop()
+ls()
+ht(3)
+hb()
+t1->Show(1)
+q
+.q
+.L readtree3.C++g
+.L readtree3.C++g
+.q
+.L readtree3.C++g
+readtree3 l
+l.Loop()
+.q
+.L readtree3.C++g
+readtree3 l
+l.Loop()
+ls()
 ht(2)
-fit->SetParameters( 1.13596e+01, -1.31131e-02,1.40996e+03,6.61280e+02,2.75525e+01)
-fit("fit","","",500,800)
-N=9.43895e+04/5.
-18.88/17.65-1
-.x macros/readtree.cc++g
-ls()
-ht(4)
-TF1* fit=new TF1("fit","expo(0)+gausn(2)")
-fit->SetParameters( 1.13596e+01, -1.31131e-02,1.40996e+03,6.61280e+02,2.75525e+01)
-fit("fit","","",500,800)
-N=4.63239e+05/5.
-N/5000.
-.q
-.q
-.x macros/readtree.cc++g
-ls()
-ht(1)
+hb()
 hn()
 .q
-.x macros/readtree.cc++g
-ht(1)
+.L readtree3.C++g
+readtree3 l
+l.Loop()
+ls()
+ht(2)
+hb()
+hn()
+hn()
+pry()
+10000*130
+10000*130
+10*1300*10000
+10*1300*20000
+10*1300*2000
+10*130*20000
+90-10.5
+.q
+.L readtree3.C+
+readtree3 l
+l.Loop()
+.q
+.L readtree3.C+
+readtree3 l
+l.Loop()
+.q
+.L readtree3.C+
+readtree3 l
+l.Loop()
+.q
+.L readtree3.C+
+readtree3 l
+l.Loop()
+.q
+readtree3 l
+.L readtree3.C+
+readtree3 l
+l.Loop()
+.q
+.L readtree3.C+
+readtree3 l
+l.Loop()
+.q
+.L readtree3.C+
+readtree3 l
+l.Loop()
+ls()
+hn()
+hn()
+.q
+.L readtree3.C+
+readtree3 l
+l.Loop()
+hn()
+hn()
+hb()
+fit("gaus")
+fit("gaus","","",8,11)
+.q
+.L readtree3.C+
+readtree3 l
+l.Loop()
+ls()
+hn()
+.q
+.L readtree3.C+
+l.Loop()
+readtree3 l
+l.Loop()
+ls()
 hn()
 hn()
 hn()
-TF1* fit=new TF1("fit","expo(0)+gausn(2)")
-fit->SetParameters( 1.13596e+01, -1.31131e-02,1.40996e+03,6.61280e+02,2.75525e+01)
-fit("fit","","",600,1000)
-N=4.51296e+05/500000.
-N=4.51296e+05/5
-N/500000.
-ls()
-ht(4)
-.x macros/readtree.cc++g
-TF1* fit=new TF1("fit","expo(0)+gausn(2)")
-ls()
-ht(4)
-fit->SetParameters( 1.13596e+01, -1.31131e-02,1.40996e+03,6.61280e+02,2.75525e+01)
-fit("fit","","",600,1000)
-print()
-.!lpr c1.ps
-.q
-.x macros/readtree.cc++g
-TF1* fit=new TF1("fit","expo(0)+gausn(2)")
-fit->SetParameters( 1.13596e+01, -1.31131e-02,1.40996e+03,6.61280e+02,2.75525e+01)
-ht(4)
-fit("fit","","",600,1000)
-scale(1./500000.)
-ls()
-ht(5)
-ht(5)
-print()
-.!lpr c1.ps
-N=4.50616e+05/5.
-N/500000.
-1.62782e+03/5.
-1.62782e+03/5./500000.
-ls()
-ls()
-ht(4)
-TSpline3* sp=new TSpline3(hEdep_smcor)
-sp->Draw()
-ls()
-ht(4)
-sp->Draw()
-sp->GetDelta()
-sp->SetNpx(1000)
-sp->Draw()
-sp->SetNpx(10000)
-sp->Draw()
-sp->GetNpx()
-TSpline3* sp=new TSpline3(hEdep_smcor)
-sp->GetNpx()
-sp->SetNpx()
-sp->GetNpx(1000)
-.q
-.q
-.x macros/readtree.cc++g
-.q
-.x macros/readtree.cc++g
-ls()
-ht(4)
-print()
-.!lpr
-.!lpr c1,ps
-.!lpr c1.ps
-hstore("root/response_function.root")
-.q
-.q
-.q
-.q
-.x macros/readtree.cc++g
-root
-ls()
-ht(4)
-TF1* fit=new TF1("fit","expo(0)+gausn(2)")
-fit->SetParameters( 1.13596e+01, -1.31131e-02,1.40996e+03,6.61280e+02,2.75525e+01)
-fit("fit","","",500,800)
-fit("expo
-","","",450,500)
-fit->SetParameters( -3.64265e-01,-1.26658e-02,9.47806e-01,6.60472e+02,2.87610e+01)
-fit("fit","","",500,800)
-.q
-.x macros/readtree.cc++g
-ht(4)
-ht(4)
-.x macros/readtree.cc++g
-ls()
-ht(4)
-TF1* fit=new TF1("fit","expo(0)+gausn(2)")
-fit->SetParameters( -3.64265e-01,-1.26658e-02,9.47806e-01,6.60472e+02,2.87610e+01)
-fit("fit","","",500,800)
-9.3562*2.
-.q
-TF1* fit=new TF1("fit","expo(0)+gausn(2)")
-fit->SetParameters( -3.64265e-01,-1.26658e-02,9.47806e-01,6.60472e+02,2.87610e+01)
-.x macros/readtree.cc++g
-ht(4)
-fit("fit","","",500,800)
-4.67810e+05/5.
-4.67810e+05/5./500000.
-.q
-.q
-.q
-.x macros/readtree.cc++g
-TF1* fit=new TF1("fit","expo(0)+gausn(2)")
-fit->SetParameters( -3.64265e-01,-1.26658e-02,9.47806e-01,6.60472e+02,2.87610e+01)
-ht(4)
-fit("fit","","",500,800)
-N=4.48819e+05/5
-N/500000.
-1.55896e+03/5./500000.
-.q
-.q
-.q
-.x macros/readtree.cc++g
-.q
-.x macros/readtree.cc++g
-ht(4)
-TF1* fit=new TF1("fit","expo(0)+gausn(2)")
-fit->SetParameters( -3.64265e-01,-1.26658e-02,9.47806e-01,6.60472e+02,2.87610e+01)
-fit("fit","","",500,800)
-fit("fit
-@
-fit("expo
-@
-fit("expo","","",600,700)
-fit("gausn","","",700,1000)
-fit->SetParameters( -7.78415e-01,-9.36899e-03,8.97406e-01,7.89439e+02,4.01434e+01)
-fit("fit","","",600,1000)
-8.72507e-01/5.
-3.17484e-03/5.
-.q
-2000./400.
-.q
-.q
-.q
-.q
-TFile *_file0 = TFile::Open("root/simucat.root")
-.ls
-t1->Show(1)
-t1->Draw("NumHit")
-t1->Draw("SourceZ:SourceX","","colz")
-t1->Draw("Edep")
-t1->Draw("TotalEdep")
-t1->Draw("TotalEdep>>h(100,0,1)")
-t1->Draw("TotalEdep>>h(100,0,100)")
-t1->Draw("TotalEdep>>h(100,0,400)")
-t1->Draw("TotalEdep>>h(100,0,1000)")
-t1->Draw("TotalEdep:Edep>>h(100,0,1000,100,0,1000)")
-t1->Draw("TotalEdep:Edep>>h(100,0,1000,100,0,1000)","","colz")
-t1->Draw("EGamma>>h(100,0,1000)","","colz")
-t1->Draw("EGamma>>h(100,0,10000)","","colz")
-t1->Draw("EGamma>>h(100,0,2000)","","colz")
-t1->Draw("Edep")
-t1->Draw("Edep","Edep!=0")
-t1->Draw("Edep>h(1000,0,1000)","Edep!=0")
-t1->Draw("Edep>>h(1000,0,1000)","Edep!=0")
-t1->Draw("Edep>>h(100,0,1000)","Edep!=0")
-t1->Draw("Edep>>h(100,0,1000)","Edep>1")
-8./sqrt(200.)
-.q
-TFile *_file0 = TFile::Open("event_generator/quasi.root")
-tree->Show(1)
-tree->Draw("phi_1:phi_2","","colz")
-tree->Draw("phi_1*180./3.14:phi_2*180./3.14","","colz")
-tree->Draw("theta_1*180./3.14:theta_2*180./3.14","","colz")
-prx()
-hn()
-prx()
-ls()
-tree->Draw("theta_1*180./3.14:theta_2*180./3.14","","colz")
-tree->Draw("theta_1*180./3.14:theta_2*180./3.14>>h","","colz")
-hn()
-prx()
-xsta()
-xsta()
-TFile *_file0 = TFile::Open("event_generator/quasi.root")
-ls()
-.ls
-tree->Show(1)
-tree->Draw("P1LL.Theta():P2LL.Theta()","","colz")
-.q
-TFile *_file0 = TFile::Open("event_generator/quasi.root")
-tree->Draw("P1LL.Theta():P2LL.Theta()","","colz")
-.q
-TFile *_file0 = TFile::Open("event_generator/quasi.root")
-tree->Draw("P1LL.Theta():P2LL.Theta()","","colz")
-tree->Draw("P1LL.Angle(P2LL)","","colz")
-.q
-TFile *_file0 = TFile::Open("event_generator/quasi.root")
-tree->Draw("P1LL.Vect().Angle(P2LL.Vect())","","colz")
-.q
-TFile *_file0 = TFile::Open("event_generator/quasi.root")
-tree->Draw("(P1LL+P2LL).M()","","colz")
-.q
-TFile *_file0 = TFile::Open("event_generator/quasi.root")
-tree->Draw("MissingMass.M()","","colz")
-tree->Draw("P1LL.M()","","colz")
-tree->Draw("P1LL.M()","","colz")
-tree->Draw("P2LL.M()","","colz")
-tree->Draw("P2LL.M()")
-tree->Draw("PALL.M()")
-tree->Draw("PBLL.M()")
-tree->Draw("MissingMass.M()")
-tree->Draw("MissingMass.M()-PBLL.M()")
-tree->Show(1)
-tree->Draw("MissingMass.M()-PBLL.M()")
-.q
-TFile *_file0 = TFile::Open("event_generator/quasi.root")
-tree->Draw("MissingMass.M()-PBLL.M()")
-.q
-TFile *_file0 = TFile::Open("event_generator/quasi.root")
-.q
-TFile *_file0 = TFile::Open("event_generator/quasi.root")
-tree->Draw("E1:theta_1*180./TMath::Pi()>>h(700,0,70,400,0,400)","","colz")
-tree->Draw("E1:theta_1*180./TMath::Pi()>>h(70,0,70,400,0,400)","","colz")
-.q
-TFile *_file0 = TFile::Open("event_generator/quasi.root")
-tree->Draw("E1:theta_1*180./TMath::Pi()>>h(70,0,70,400,0,400)","","colz")
-.q
-TFile *_file0 = TFile::Open("event_generator/quasi.root")
-TFile *_file0 = TFile::Open("event_generator/quasi.root")
-tree->Draw("E1:theta_1*180./TMath::Pi()>>h(70,0,70,400,0,400)","","colz")
-lnz()
-tree->Draw("E1:theta_1*180./TMath::Pi()>>h(70,0,70,100,0,400)","","colz")
-tree->Draw("E1:theta_1*180./TMath::Pi()>>h(100,0,70,100,0,400)","","colz")
-TCut cut = " (theta_1*180./TMath::Pi()>10&&theta_1*180./TMath::Pi()<25&&E1<250 || (theta_1*180./TMath::Pi()<33&&E1<235) || (theta_1*180./TMath::Pi()<40&&E1<220)&& (theta_1*180./TMath::Pi()<70&&E1<200))"
-tree->Draw("E1:theta_1*180./TMath::Pi()>>h(100,0,70,100,0,400)","cut","colz")
-TCut cut = " (theta_1>10*TMath::Pi/180.&&theta_1<25*TMath::Pi()/180.&&E1<250 || (theta_1*180.<33*TMath::Pi()/180.&&E1<235) || (theta_1<40*TMath::Pi()/180.&&E1<220)&& (theta_1<70*TMath::Pi()/180.&&E1<200))"
-tree->Draw("E1:theta_1*180./TMath::Pi()>>h(100,0,70,100,0,400)","cut","colz")
-tree->Draw("E1:theta_1*180./TMath::Pi()>>h(100,0,70,100,0,400)",cut,"colz")
-TCut cut = " (theta_1>10*3.1415/180.&&theta_1<25*3.1415/180.&&E1<250 || (theta_1*180.<33*3.1415/180.&&E1<235) || (theta_1<40*3.1415/180.&&E1<220)&& (theta_1<70*3.1415/180.&&E1<200))"
-tree->Draw("E1:theta_1*180./TMath::Pi()>>h(100,0,70,100,0,400)",cut,"colz")
-TCut cut = " theta_1>10*3.1415/180. && (theta_1<25*3.1415/180.&&E1<250 || (theta_1*180.<33*3.1415/180.&&E1<235) || (theta_1<40*3.1415/180.&&E1<220)&& (theta_1<70*3.1415/180.&&E1<200))"
-tree->Draw("E1:theta_1*180./TMath::Pi()>>h(100,0,70,100,0,400)",cut,"colz")
-TCut cut = " theta_1>10*3.1415/180. && (theta_1<25*3.1415/180.&&E1<250 || (theta_1*180.<33*3.1415/180.&&E1<235) || (theta_1<40*3.1415/180.&&E1<220) || (theta_1<70*3.1415/180.&&E1<200))"
-tree->Draw("E1:theta_1*180./TMath::Pi()>>h(100,0,70,100,0,400)",cut,"colz")
-tree->Draw("E1:theta_1*180./TMath::Pi()>>hnocut(100,0,70,100,0,400)","","colz")
-ls()
-ht(1)
-zone()
+hb()
+hb()
 zone(2,1)
-hht(2);hn()
-print()
-.!lpr c1.ps
-46462./50000.
-TCut cut = " theta_1>17*3.1415/180. && (theta_1<25*3.1415/180.&&E1<250 || (theta_1*180.<33*3.1415/180.&&E1<235) || (theta_1<40*3.1415/180.&&E1<220) || (theta_1<70*3.1415/180.&&E1<200))"
-tree->Draw("E1:theta_1*180./TMath::Pi()>>hnocut(100,0,70,100,0,400)","","colz")
-tree->Draw("E1:theta_1*180./TMath::Pi()>>hnocut(100,0,70,100,0,400)",cut,"colz")
-hnocut->GetEntries()
-print()
-.!lpr c1.ps
-42798./50000.
-tree->Draw("theta_1*180./TMath::Pi():theta_2*180./TMath::Pi()>>hnocut(100,0,70,100,0,70)",cut,"colz")
-tree->Draw("theta_1*180./TMath::Pi():theta_2*180./TMath::Pi()>>hnocut(100,0,70,100,0,70)","","colz")
-TCut cut2 = " theta_2>17*3.1415/180. && (theta_2<25*3.1415/180.&&E1<250 || (theta_2*180.<33*3.1415/180.&&E1<235) || (theta_2<40*3.1415/180.&&E1<220) || (theta_2<70*3.1415/180.&&E1<200))"
-tree->Draw("theta_1*180./TMath::Pi():theta_2*180./TMath::Pi()>>hnocut(100,0,70,100,0,70)",cut2,"colz")
-tree->Draw("theta_1*180./TMath::Pi():theta_2*180./TMath::Pi()>>hnocut(100,0,70,100,0,70)",cut2&&cut,"colz")
-35576./50000.
-tree->Draw("theta_1*180./TMath::Pi():theta_2*180./TMath::Pi()>>hnocut(100,0,70,100,0,70)","","colz")
-TCut cut2 = " theta_2>10*3.1415/180. && (theta_2<25*3.1415/180.&&E1<250 || (theta_2*180.<33*3.1415/180.&&E1<235) || (theta_2<40*3.1415/180.&&E1<220) || (theta_2<70*3.1415/180.&&E1<200))"
-TCut cut = " theta_1>10*3.1415/180. && (theta_1<25*3.1415/180.&&E1<250 || (theta_1*180.<33*3.1415/180.&&E1<235) || (theta_1<40*3.1415/180.&&E1<220) || (theta_1<70*3.1415/180.&&E1<200))"
-tree->Draw("theta_1*180./TMath::Pi():theta_2*180./TMath::Pi()>>hnocut(100,0,70,100,0,70)",cut&&cut2,"colz")
-42174./50000.
-tree->Draw("theta_1*180./TMath::Piuu>>hnocut(100,0,70,100,0,70)",cut&&cut2,"colz")
-tree->Draw("phi_1*180./TMath::Pi():phi_2*180./TMath::Pi()>>hnocut(100,0,70,100,0,70)",cut&&cut2,"colz")
-tree->Draw("phi_1*180./TMath::Pi():phi_2*180./TMath::Pi()>>hnocut(100,-90,90,100,0,70)",cut&&cut2,"colz")
-tree->Draw("phi_1*180./TMath::Pi():phi_2*180./TMath::Pi()>>hnocut(100,-90,90,100,-90,90)",cut&&cut2,"colz")
-tree->Draw("phi_1*180./TMath::Pi():phi_2*180./TMath::Pi()>>hnocut(100,-180,180,100,-180,180)",cut&&cut2,"colz")
-tree->Draw("phi_1*180./TMath::Pi():phi_2*180./TMath::Pi()>>hnocut(100,-180,180,100,-180,180)","","colz")
-tree->Draw("phi_1*180./TMath::Pi():phi_2*180./TMath::Pi()>>hnocut(100,-180,180,100,-180,180)","","colz")
-.q
-TFile *_file0 = TFile::Open("event_generator/quasi.root")
-TCut cut = " theta_1>10*3.1415/180. && (theta_1<25*3.1415/180.&&E1<250 || (theta_1*180.<33*3.1415/180.&&E1<235) || (theta_1<40*3.1415/180.&&E1<220) || (theta_1<70*3.1415/180.&&E1<200))"
-TCut cut2 = " theta_2>10*3.1415/180. && (theta_2<25*3.1415/180.&&E1<250 || (theta_2*180.<33*3.1415/180.&&E1<235) || (theta_2<40*3.1415/180.&&E1<220) || (theta_2<70*3.1415/180.&&E1<200))"
-tree->Draw("phi_1*180./TMath::Pi():phi_2*180./TMath::Pi()>>hnocut(100,-180,180,100,-180,180)","","colz")
-tree->Draw("phi_1*180./TMath::Pi():ReconstructedEx>>hnocut(100,-180,180,100,-180,180)","","colz")
-tree->Draw("theta_1*180./TMath::Pi():ReconstructedEx>>hnocut(100,-180,180,100,-180,180)","","colz")
-tree->Draw("theta_1*180./TMath::Pi():ReconstructedEx>>hnocut(100,0,50,100,-180,180)","","colz")
-tree->Draw("theta_1*180./TMath::Pi():ReconstructedEx>>hnocut(100,0,10,100,-180,180)","","colz")
-tree->Draw("E1:theta_1*180./TMath::Pi()>>hnocut(100,0,70,100,0,400)",cut,"colz")
-tree->Draw("E1:E2>>hnocut(100,0,400,100,0,400)",cut,"colz")
-tree->Draw("E1:E2>>hnocut(100,0,400,100,0,400)","","colz")
-tree->Draw("E1:E2>>hnocut(100,0,400,100,0,400)",cut&&cut2,"colz")
-TCut cut2 = " theta_2>10*3.1415/180. && (theta_2<25*3.1415/180.&&E2<250 || (theta_2*180.<33*3.1415/180.&&E2<235) || (theta_2<40*3.1415/180.&&E2<220) || (theta_2<70*3.1415/180.&&E2<200))"
-tree->Draw("E1:E2>>hnocut(100,0,400,100,0,400)",cut&&cut2,"colz")
-tree->Draw("theta_1*180./TMath::Pi():theta_2*180./TMath::Pi()>>hnocut(100,0,70,100,0,70)",cut&&cut2,"colz")
-tree->Draw("theta_1*180./TMath::Pi():theta_2*180./TMath::Pi()>>hnocut(100,0,70,100,0,70)","","colz")
+hht()
+hhtp()
+hn()]
+hn()
 print()
 .!lpr c1.ps
 .q
-TFile *_file0 = TFile::Open("event_generator/quasi.root")
-tree->Draw("theta_1*180./TMath::Pi():theta_2*180./TMath::Pi()>>hnocut(100,0,70,100,0,70)","","colz")
-tree->Draw("phi_1*180./TMath::Pi():phi_2*180./TMath::Pi()>>hnocut(100,-180,180,100,-180,180)","","colz")
-.q
-TFile *_file0 = TFile::Open("root/simucat.root")
-tree->Show(1)
-.ls]
-.ls
-t1->Show(1)
-t1->Show("DetID")
-t1->Drow("DetID")
-t1->Draw("DetID")
-t1->Draw("Edep:DetID","","colz")
-t1->Draw("Edep:HitX","","colz")
-t1->Draw("Edep:HitY","","colz")
-t1->Draw("Edep:HitZ","","colz")
-t1->Draw("Edep_sm","","colz")
-.q
-TFile *_file0 = TFile::Open("root/simucat.root")
-ls()
-.ls
-t1->Show(2)
-t1->Draw("Edep_sm","","colz")
-t1->Draw("Edep","","colz")
-t1->Draw("Edep","","colz")
-.q
-TFile *_file0 = TFile::Open("root/simucat.root")
-t1->Draw("Edep","","colz")
-t1->Draw("Edep_sm","","colz")
-TFile *_file0 = TFile::Open("root/simucat.root")
-.ls
-t1->Show(1)
-t1->Draw(Edep)
-t1->Draw("Edep")
-.q
-TFile *_file0 = TFile::Open("event_generator/quasi.root")
-ls()
-.ls
-tree->Show(10
-)
-tree->Draw("E1")
-ls()
-hb.q
-ls
-.q
-TFile *_file0 = TFile::Open("root/simucat.root")
-t1->Draw("Edep")
-ls()
-t1->Show(1)
-t1->Draw("Edep")
-t1->Draw("Egamma")
-t1->Draw("EGamma")
-.q
-t1->Draw("EGamma")
-.ls
-.ls
-.q
-TFile *_file0 = TFile::Open("root/simucat.root")
-.ls
-t1->Draw("EGamma")
-ls()
-t1->Show(1)
-t1->Draw("EventID")
-t1->Draw("EGammaCM")
-t1->Draw("DirGamma")
-t1->Draw("Edep")
-t1->Draw("Edep_sm")
-TFile *_file0 = TFile::Open("root/simucat.root")
-t1->Draw("EGamma")
-t1->Draw("EGamma>>h(100,0,1)")
-.q
-TFile *_file0 = TFile::Open("root/simucat.root")
-t1->Draw("EGamma>>h(100,0,1)")
-.q
-.q
-.q
-TFile *_file0 = TFile::Open("root/simucat.root")
-t1->Draw("EGamma>>h(100,0,1)")
-t1->Draw("EGamma>>h(100,0,0.01)")
-t1->Draw("EGamma>>h(100,0,0.01)")\
-t1->Draw("EGamma>>h(100,0,0.000001)")
-t1->Draw("EGamma>>h(100,0,0.0000000001)")
-ls()
-t1->Show(1)
-t1->Draw("TotalEdep")
-TFile *_file0 = TFile::Open("event_generator/quasi.root")
-tree->Show(1)
-tree->Draw("E1+E2")
-.q
-TFile *_file0 = TFile::Open("./root/simucat.root")
-ls()
-.ls
-t1->Show(1)
-t1->Print()
-t1->Show(1)
-t1->Draw("EGamma")
-.q
-TFile *_file0 = TFile::Open("./root/simucat.root")
-t1->Draw("EGamma")
-t1->Draw("EGamma","EGamma!=0")
-t1->Draw("Edep","EGamma!=0")
-t1->Draw("Edep_sm","EGamma!=0")
-TFile *_file0 = TFile::Open("./root/simucat.root")
-t1->Draw("Edep_sm","EGamma!=0")
-.q
-TFile *_file0 = TFile::Open("./root/simucat.root")
-t1->Draw("Edep","EGamma!=0")
-print()
-.!lpr c1.ps
-.q
-TFile *_file0 = TFile::Open("root/simucat.root")
-t1->Draw("Edep","EGamma!=0")
-t1->Draw("Edep")
-t1->Draw("Edep_sm","EGamma!=0")
-TFile *_file0 = TFile::Open("root/simucat.root")
-t1->Draw("Edep")
-t1->Draw("Edep","EGamma!=0")
-print()
-.!lpr c1.ps
-t1->Draw("EGamma","EGamma!=0")
-print()
-.!lpr c1.ps
-.q
-TFile *_file0 = TFile::Open("root/simucat.root")
-.ls
-t1->Draw("EGamma","EGamma!=0")
-t1->Draw("EGamma>>h1(400,0,400)","EGamma!=0")
-t1->Draw("EGamma>>h1(200,0,400)","EGamma!=0")
-t1->Draw("EGamma>>h1(100,0,400)","EGamma!=0")
-t1->Draw("Edep>>h2(100,0,400)","EGamma!=0")
+.L readtree3.C+
+.L readtree3.C+
+.L readtree3.C+
+readtree3 l
+l.Loop()
 ls()
 hn()
-hn("same")
-ht(2,"same")
-TFile *_file0 = TFile::Open("root/simucat.root")
-.ls
-t1->Show(1)
+hn()
+.q
+.L readtree3.C+
+readtree3 l
+l.Loop()
+.q
+.L readtree3.C+
+readtree3 l
+l.Loop()
+ls()
+hn()
+hn()
+.q
+.L readtree3.C+
+readtree3 l
+l.Loop()
+ls()
+hn()
+hn()
+print()
+.!lpr c1.ps
+fit("gaus")
+.q
+.L readtree3.C+
+l.Loop()
+readtree3 l
+l.Loop()
+ls()
+hn()
+hn()
+0.4/sqrt(12)
+fit("gaus")
+print()
+.!lpr c1.ps
 .q

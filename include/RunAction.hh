@@ -18,7 +18,7 @@
 #include "TLorentzVector.h"
 
 #endif
-
+class TVector3;
 
 class RunAction : public G4UserRunAction
 {
@@ -58,6 +58,8 @@ private:
   G4double DetX[402], DetY[402], DetZ[402];
   //G4double Angle[14];
   G4double DetXLaBr[8],DetYLaBr[8],DetZLaBr[8];
+  G4double DetXSi[3],DetYSi[3],DetZSi[3];
+
   
   std::vector<G4int> tDetID;
   std::vector<G4double> tEdep;
@@ -79,6 +81,17 @@ private:
   std::vector<G4double> tDetXLaBr, tDetYLaBr, tDetZLaBr;
   std::vector<G4double> tEdep_smLaBr;
 
+
+  G4int tNumHitSi;
+  G4double tTotalEdepSi, tTotalTrackLengthSi;
+  std::vector<G4int> tDetIDSi;
+  std::vector<G4double> tEdepSi;
+  std::vector<G4double> tTrackLengthSi;
+  std::vector<G4double> tTimeSi;
+  std::vector<G4double> tDetXSi, tDetYSi, tDetZSi;
+  std::vector<G4double> tEdep_smSi;
+  TVector3 tTrackerPos;
+  TVector3 tTrackerPos_sm;
 
 public:
   void SetRootFileName(G4String name){fRootFileName = name;}
@@ -160,7 +173,36 @@ public:
   void SettTotalEdepLaBr(G4double *val){tTotalEdepLaBr = *val;}
   void SettTotalTrackLengthLaBr(G4double *val){tTotalTrackLengthLaBr = *val;}
 
+  //Si
+  void SettEdepSi(G4double val){tEdepSi.push_back(val);}
+  void SettEdep_smSi(G4double val){tEdep_smSi.push_back(val);}
+  void SettTrackLengthSi(G4double val){tTrackLengthSi.push_back(val);}
+  void SettDetIDSi(G4int val){tDetIDSi.push_back(val);}
+  void SettDetPositionSi(G4int DetectorID){
+    tDetXSi.push_back(DetXSi[DetectorID-1]);
+    tDetYSi.push_back(DetYSi[DetectorID-1]);
+    tDetZSi.push_back(DetZSi[DetectorID-1]);
+  }
+  void SettDetPosXSi(std::vector<G4double> vx){
+    tDetXSi=vx;
+  }
+  void SettDetPosYSi(std::vector<G4double> vy){
+    tDetYSi=vy;
+  }
+  void SettDetPosZSi(std::vector<G4double> vz){
+    tDetZSi=vz;
+  }
+  void SettTimeSi(G4double val){tTimeSi.push_back(val);}
+  void SettNumHitSi(G4int *val){tNumHitSi = *val;}
+  void SettTotalEdepSi(G4double *val){tTotalEdepSi = *val;}
+  void SettTotalTrackLengthSi(G4double *val){tTotalTrackLengthSi = *val;}
+  void SettTrackerPos(TVector3 vec){//tTrackerPos.push_back(&vec);}
+    tTrackerPos=vec;}
+  void SettTrackerPos_sm(TVector3 vec){//tTrackerPos_sm.push_back(&vec);}
+    tTrackerPos_sm=vec;}
   void ClearVectors(){
+    // tTrackerPos.clear();
+    // tTrackerPos_sm.clear();
     tDetID.clear();
     tTrackLength.clear();
     tEdep.clear();
@@ -184,6 +226,16 @@ public:
     tDetXLaBr.clear();
     tDetYLaBr.clear();
     tDetZLaBr.clear();
+
+    //Si
+    tDetIDSi.clear();
+    tTrackLengthSi.clear();
+    tEdepSi.clear();
+    tEdep_smSi.clear();
+    tTimeSi.clear();
+    tDetXSi.clear();
+    tDetYSi.clear();
+    tDetZSi.clear();
 }
 
 #endif

@@ -1,21 +1,21 @@
 // CalorHit.hh
 // 2012.10.16 Yasuhiro Togano
-// originated from the B4cCalorHit.hh by Kobayashi-kun
+// originated from the B4cSiHit.hh by Kobayashi-kun
 
-#ifndef CALORHIT_H
-#define CALORHIT_H 1
+#ifndef SIHIT_H
+#define SIHIT_H 1
 
 #include "G4VHit.hh"
 #include "G4THitsCollection.hh"
 #include "G4Allocator.hh"
 #include "G4ThreeVector.hh"
 
-// Calorimetor Hit class
+// Siimetor Hit class
 // It defines data members to store the energy deposit and track lengths
 // of charged particles in a selected detector volume;
 // fEdep, fTrackLength
 
-class CalorHit : public G4VHit
+class SiHit : public G4VHit
 {
 private:
   G4double fEdep;
@@ -23,13 +23,13 @@ private:
   G4double fGlobalTime;
   G4ThreeVector fHitPosition;
 public:
-  CalorHit();
-  CalorHit(const CalorHit&);
-  virtual ~CalorHit();
+  SiHit();
+  SiHit(const SiHit&);
+  virtual ~SiHit();
   
   // operators
-  const CalorHit& operator=(const CalorHit&);
-  G4int operator==(const CalorHit&) const;
+  const SiHit& operator=(const SiHit&);
+  G4int operator==(const SiHit&) const;
 
   inline void* operator new(size_t);
   inline void operator delete(void*);
@@ -53,20 +53,20 @@ public:
 
 };
 //=========================================================================
-typedef G4THitsCollection<CalorHit> CalorHitsCollection;
-extern G4Allocator<CalorHit> CalorHitAllocator;
+typedef G4THitsCollection<SiHit> SiHitsCollection;
+extern G4Allocator<SiHit> SiHitAllocator;
 //=========================================================================
-inline void *CalorHit::operator new(size_t){
+inline void *SiHit::operator new(size_t){
   void *hit;
-  hit = (void *) CalorHitAllocator.MallocSingle();
+  hit = (void *) SiHitAllocator.MallocSingle();
   return hit;
 }
 
-inline void CalorHit::operator delete(void *hit){
-  CalorHitAllocator.FreeSingle((CalorHit*) hit);
+inline void SiHit::operator delete(void *hit){
+  SiHitAllocator.FreeSingle((SiHit*) hit);
 }
 
-inline void CalorHit::Add(G4double de, G4double dl){
+inline void SiHit::Add(G4double de, G4double dl){
   fEdep += de;
   fTrackLength += dl;
 }

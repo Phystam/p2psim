@@ -11,13 +11,14 @@
 #include "globals.hh"
 #include "G4VisAttributes.hh"
 #include "G4Box.hh"
-
+#include "G4Region.hh"
 #include "G4RunManager.hh"
 #include "G4GeometryManager.hh"
 #include "simconst.hh"
-
+#include "G4Trd.hh"
 #include "G4SystemOfUnits.hh"
 #include "TString.h"
+#include "SiSD.hh"
 // define the size of the experimental hall
 static const G4ThreeVector SIZE_EXPHALL(5.*m, 5.*m, 10*m);
 
@@ -96,32 +97,49 @@ G4VPhysicalVolume *DetectorConstruction::Construct()
   G4double SiY = 50.*mm;
   G4double SiZ = 50.*um;
   const G4int numz = 2;
-  G4double zplane[]={0.*mm, 50.*mm};
-  G4double rinner[]={100.*mm,50.*mm};
-  G4double router[]={100.1*mm,50.1*mm};
+  G4double zplane[]={0.*mm, 40.*mm};
+  G4double rinner[]={100.*mm,40.*mm};
+  G4double router[]={100.3*mm,40.3*mm};
   //  G4Box* SiBox = new G4Box("SiBox", SiX, SiY, SiZ);
-  G4Polyhedra* SiPoly = new G4Polyhedra("SiPoly",0,360.*deg,6,numz,zplane,rinner,router);
+  G4Polyhedra* SiPoly = new G4Polyhedra("SiPoly",0,60.*deg,1,numz,zplane,rinner,router);
+
+  // G4Trd* SiPoly = new G4Trd("SiPoly",-10*mm,10*mm,-20*mm,20*mm,300*um);
 
   G4LogicalVolume* SiLV = new G4LogicalVolume(SiPoly, Si, "SiLV", 0, 0, 0);
 
-  // //rotation  
-   G4RotationMatrix* rotCounter = new G4RotationMatrix;
-   rotCounter->rotateY(0.*deg);
-  // //position
-   G4ThreeVector xyzCounter(0.,0.,tgt_center_z+50.*mm);
-  // //transform
-   G4Transform3D posCounter(*rotCounter,xyzCounter);
+  G4int numdet =0;
+  for(int isi=0;isi<6;isi++){
+    // //rotation  
+    G4RotationMatrix* rotCounter = new G4RotationMatrix;
+    rotCounter->rotateZ(isi*60.*deg);
+    //    rotCounter->rotateY(isi*60.*deg);
+    // //position
+    G4ThreeVector xyzCounter(0.,0.,tgt_center_z+50.*mm);
+    // //transform
+    G4Transform3D posCounter(*rotCounter,xyzCounter);
+    
+    G4PVPlacement* SiTracker = new G4PVPlacement(posCounter,"SiTracker",SiLV,physiExpHall,FALSE,isi);
+    numdet++;
+  }
 
-  G4PVPlacement* SiTracker = new G4PVPlacement(posCounter,"SiTracker",SiLV,physiExpHall,FALSE,0);
+  //region
+  // static int init=1;
+  // if(init){
+  //   fArrayRegion = new G4Region("Array");
+  //   SiLV->SetRegion(fArrayRegion);
+  //   fArrayRegion->AddRootLogicalVolume(SiLV);
+  //   init = 0;
+  // }
+
 
   //Register to Sensitive Detector
 
   G4SDManager *SDman = G4SDManager::GetSDMpointer();
   static int init2=1;
   if(init2){
-    fArraySD = new CalorimeterSD("SiSD",
-  				 "SiCollection",
-  				 1);
+    fArraySD = new SiSD("SiSD",
+			"SiCollection",
+			numdet);
     SDman->AddNewDetector(fArraySD);
 
     SiLV->SetSensitiveDetector(fArraySD);

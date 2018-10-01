@@ -6,6 +6,8 @@
 #include "CalorHit.hh"
 #include "LaBrSD.hh"
 #include "LaBrHit.hh"
+#include "SiSD.hh"
+#include "SiHit.hh"
 #include "RunAction.hh"
 
 #include "G4RunManager.hh"
@@ -26,7 +28,7 @@
 
 // Constructor --=================================================
 EventAction::EventAction()
-  : G4UserEventAction(), fPrintModulo(10000), CalorCollectionID(-1),
+  : G4UserEventAction(), fPrintModulo(10000), CalorCollectionID(-1), SiCollectionID(-1),
     LaBrCollectionID(-1)
 {
   std::ifstream ifs;
@@ -56,6 +58,7 @@ void EventAction::EndOfEventAction(const G4Event *anEvent)
 {
   //G4cout << " ****** Start EndOfEventAction ******" << G4endl;
   G4int ndetCalor = 0;
+  G4int ndetSi = 0;
   G4double totalEdep = 0.;
   G4double totalTrackLength = 0.;
 
@@ -71,6 +74,11 @@ void EventAction::EndOfEventAction(const G4Event *anEvent)
     CalorCollectionID = SDman -> GetCollectionID("arrayCollection");
   }
 
+  if(SiCollectionID == -1){
+    SiCollectionID = SDman -> GetCollectionID("SiCollection");
+    //    std::cout<<"SiCollectionID"<<SiCollectionID<<std::endl;
+  }
+
   /*
   if(LaBrCollectionID == -1){
     LaBrCollectionID = SDman->GetCollectionID("LaBrCollection");
@@ -79,10 +87,12 @@ void EventAction::EndOfEventAction(const G4Event *anEvent)
 
   G4HCofThisEvent *hcte = anEvent->GetHCofThisEvent();
   CalorHitsCollection *CalorHC = NULL;
+  SiHitsCollection *SiHC = NULL;
   LaBrHitsCollection *LaBrHC = NULL;
 
   if(hcte){
     CalorHC = (CalorHitsCollection*)(hcte->GetHC(CalorCollectionID));
+    SiHC = (SiHitsCollection*)(hcte->GetHC(SiCollectionID));
     LaBrHC = (LaBrHitsCollection*)(hcte->GetHC(LaBrCollectionID));
   }
 
@@ -95,6 +105,11 @@ void EventAction::EndOfEventAction(const G4Event *anEvent)
 
   if(CalorHC){
     ndetCalor = CalorHC -> entries();// ndetCalor==100 : number of CsI detector
+  }
+
+  if(SiHC){
+    ndetSi = SiHC -> entries();// ndetSi==6 : number of Si detector
+    //    std::cout<<ndetSi<<std::endl;
   }
 
   for(G4int i=0;i<ndetCalor;i++){
@@ -161,6 +176,43 @@ void EventAction::EndOfEventAction(const G4Event *anEvent)
   G4cout << "======================================" << G4endl;
 #endif
 
+  //Si
+  std::vector<G4int> detIDSi;
+  std::vector<G4double> edepSi;
+  std::vector<G4double> trackLengthSi;
+  std::vector<G4double> hitposXSi;
+  std::vector<G4double> hitposYSi;
+  std::vector<G4double> hitposZSi;
+  std::vector<TVector3> hitposSi;
+  std::vector<G4double> timeSi;
+  G4int numHitSi=0;
+
+  for(G4int i=0;i<ndetSi;i++){
+    //    G4double dep = (*SiHC)[i]->GetEdep();
+    G4double dedepSi = (*SiHC)[i]->GetEdep();
+    if(dedepSi>0){
+      numHitSi++;
+      detIDSi.push_back(i+1);
+      edepSi.push_back(dedepSi);
+      trackLengthSi.push_back((*SiHC)[i]->GetTrackLength());
+      G4ThreeVector hitposg4=(*SiHC)[i]->GetHitPosition();
+      //      TVector3 hitposroot(hitposg4.x()/mm,hitposg4.y()/mm,hitposg4.z()/mm);
+      TVector3 hitposroot(hitposg4.x()/mm,hitposg4.y()/mm,hitposg4.z()/mm);
+      hitposXSi.push_back(hitposroot.X());
+      hitposYSi.push_back(hitposroot.Y());
+      hitposZSi.push_back(hitposroot.Z());
+      time.push_back((*SiHC)[i]->GetGlobalTime());
+    }
+  }
+
+#ifdef DEBUG
+  G4cout << "Si" << G4endl;
+  G4cout << "Energy deposit: " << totalEdepSi/MeV << " MeV " << G4endl;
+  G4cout << "Track Length: " << totalTrackLength/mm << G4endl;
+  G4cout << "Entries: " << ndetSi << ", numHit: " << numHit << G4endl;
+  G4cout << "numHit: " << numHitSi << G4endl;
+  G4cout << "======================================" << G4endl;
+#endif
 
 
   //fill Tree
@@ -188,10 +240,13 @@ void EventAction::EndOfEventAction(const G4Event *anEvent)
   runAction->SettTotalTrackLength(&val);
 
   runAction->ClearVectors();
+  //CATANA
   for(G4int i=0;i<numHit;i++){
     if(edep[i]<Det_E_Threshold) continue;
-    G4double sigma = GetDetResolution(edep[i],detID[i]);
-    G4double edep2 = CLHEP::RandGauss::shoot(edep[i],sigma);
+    //    G4double sigma = GetDetResolution(edep[i],detID[i]);
+    G4double sigma = 0.0456*sqrt(edep[i]);
+    
+    G4double edep2 = edep[i]>0 ? CLHEP::RandGauss::shoot(edep[i],sigma) : 0;
     runAction->SettEdep(edep[i]);
     runAction->SettEdep_sm(edep2);
     runAction->SettTrackLength(trackLength[i]);
@@ -224,6 +279,30 @@ void EventAction::EndOfEventAction(const G4Event *anEvent)
     runAction->SettDetPositionLaBr(detID_LaBr[i]);
     runAction->SettTimeLaBr(time_LaBr[i]);
   }
+
+  //Si--------------
+  intval = numHitSi;
+  runAction->SettNumHitSi(&intval);
+
+  // val = totalEdepSi/MeV;
+  // runAction->SettTotalEdepSi(&val);
+
+  // val = totalTrackLengthSi/cm;
+  // runAction->SettTotalTrackLengthSi(&val);
+
+   for(G4int i=0;i<numHitSi;i++){
+    if(edepSi[i]<Det_E_Threshold) continue;
+    //    G4double sigma = GetSiResolution(edep_Si[i]);
+    runAction->SettDetIDSi(detIDSi[i]);
+    runAction->SettDetPosXSi(hitposXSi);
+    runAction->SettDetPosYSi(hitposYSi);
+    runAction->SettDetPosZSi(hitposZSi);
+    
+    //    runAction->SettDetPositionSi(detIDSi[i]);
+    // runAction->SettTrackerPos(hitposSi[i]);
+    // runAction->SettTrackerPos_sm(hitposSi[i]);
+  }
+ 
 
   t1 -> Fill();
   

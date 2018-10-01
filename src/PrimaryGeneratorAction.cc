@@ -186,7 +186,7 @@ TLorentzVector proton[2];
   G4ParticleTable *particleTable = G4ParticleTable::GetParticleTable();
   //particle
   G4ParticleDefinition* particle_def=particleTable->FindParticle("proton");
-  std::cout<<particle_def<<std::endl;
+  //  std::cout<<particle_def<<std::endl;
   // fParticleGun_p[0]->SetParticleDefinition(particle_def);
   // fParticleGun_p[1]->SetParticleDefinition(particle_def);
    fParticleGun->SetParticleDefinition(particle_def);
@@ -215,7 +215,7 @@ TLorentzVector proton[2];
     fParticleGun->SetParticleEnergy((proton[i].E()-proton[i].M())*MeV);
     //    fParticleGun->SetParticleEnergy(100.*MeV);
     fParticleGun -> GeneratePrimaryVertex(anEvent);
-    std::cout << proton[i].Px()<<" "<<proton[i].Py() << " " << proton[i].Pz() <<" "<< proton[i].E()-proton[i].M() << std::endl;     
+    //    std::cout << proton[i].Px()<<" "<<proton[i].Py() << " " << proton[i].Pz() <<" "<< proton[i].E()-proton[i].M() << std::endl;     
     //    runAction->SettEGammaCM(gammaE[i],i);
     runAction->SettEGamma((proton[i].E()-proton[i].M())*MeV, i);
     runAction->SettPosGamma(beamPos, i);

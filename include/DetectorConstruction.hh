@@ -18,11 +18,12 @@
 #include "TCATANA.hh"
 #include "TLaBr3Array.hh"
 #include "CalorimeterSD.hh"
-
+#include "SiSD.hh"
+//#include "G4Region.hh"
 class G4Box;
 class G4LogicalVolume;
 class G4VPhysicalVolume;
-
+class fArrayRegion;
 // class definition
 class DetectorConstruction : public G4VUserDetectorConstruction
 {
@@ -43,8 +44,8 @@ private:
   G4String fDetMaterialName;
   G4ThreeVector fArrayPos;
   G4ThreeVector fLaBrPos;
-  CalorimeterSD *fArraySD;
-  
+  SiSD *fArraySD;
+  //  G4Region *fArrayRegion;  
 public:
   DetectorConstruction();
   ~DetectorConstruction();

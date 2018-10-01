@@ -1,8 +1,8 @@
-// TrackHit.cc
+// SiHit.cc
 // 2012.10.16 Yasuhiro Togano
-// Based on the B4cTrackHit.cc by Kobayashi-kun
+// Based on the B4cSiHit.cc by Kobayashi-kun
 
-#include "TrackHit.hh"
+#include "SiHit.hh"
 #include "G4UnitsTable.hh"
 #include "G4VVisManager.hh"
 #include "G4Circle.hh"
@@ -11,25 +11,25 @@
 
 #include <iomanip>
 
-G4Allocator<TrackHit> TrackHitAllocator;
+G4Allocator<SiHit> SiHitAllocator;
 
 
 // constructor
-TrackHit::TrackHit()
+SiHit::SiHit()
   : G4VHit(), fEdep(0.), fTrackLength(0.)
 {}
 
 // destructor
-TrackHit::~TrackHit(){}
+SiHit::~SiHit(){}
 
-TrackHit::TrackHit(const TrackHit& right)
+SiHit::SiHit(const SiHit& right)
   : G4VHit()
 {
   fEdep = right.fEdep;
   fTrackLength = right.fTrackLength;
 }
 
-const TrackHit& TrackHit::operator=(const TrackHit& right)
+const SiHit& SiHit::operator=(const SiHit& right)
 {
   fEdep = right.fEdep;
   fTrackLength = right.fTrackLength;
@@ -38,12 +38,12 @@ const TrackHit& TrackHit::operator=(const TrackHit& right)
 }
 
 
-G4int TrackHit::operator==(const TrackHit& right) const
+G4int SiHit::operator==(const SiHit& right) const
 { 
   return ( this ==&right ) ? 1: 0;
 }
 
-void TrackHit::Print(){
+void SiHit::Print(){
   G4cout << "Edep: "
 	 << std::setw(7) << G4BestUnit(fEdep,"Energy") << G4endl
 	 << "TrackLength: "

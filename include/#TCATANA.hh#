@@ -1,4 +1,4 @@
-^// Class to construct the sphere gamma detector 
+// Class to construct the sphere gamma detector 
 // 2012.11.8 Yasuhiro Togano
 
 #ifndef TCATANA_H

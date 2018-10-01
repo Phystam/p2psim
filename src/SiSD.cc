@@ -1,8 +1,8 @@
-// TrackerSD class 
+// SiSD class 
 // 2012.10.16 Yasuhiro Togano
-// Almost the copy of B4cTrackerSD.cc from Kobayashi-kun
+// Almost the copy of B4cSiSD.cc from Kobayashi-kun
 
-#include "TrackerSD.hh"
+#include "SiSD.hh"
 
 #include "G4HCofThisEvent.hh"
 #include "G4ThreeVector.hh"
@@ -12,7 +12,7 @@
 //#define DEBUG
 
 // Constructor
-TrackerSD::TrackerSD(
+SiSD::SiSD(
 			     const G4String& name,
 			     const G4String& hitsCollectionName,
 			     G4int nbofCells)
@@ -25,15 +25,15 @@ TrackerSD::TrackerSD(
 }
 
 // Destructor
-TrackerSD::~TrackerSD(){
+SiSD::~SiSD(){
   delete [] HitID;
 }
 
-void TrackerSD::Initialize(G4HCofThisEvent *hcte)
+void SiSD::Initialize(G4HCofThisEvent *hcte)
 {
   // Create hits collection
   fHitsCollection = 
-    new TrackHitsCollection(SensitiveDetectorName, collectionName[0]);
+    new SiHitsCollection(SensitiveDetectorName, collectionName[0]);
 
   // Add this collection to hcte
   G4int hcID = 
@@ -43,13 +43,13 @@ void TrackerSD::Initialize(G4HCofThisEvent *hcte)
   // Create hits
   //fNbofCells for cells 
   for (G4int i=0;i<fNbofCells; i++){
-    fHitsCollection->insert(new TrackHit());
+    fHitsCollection->insert(new SiHit());
     HitID[i] = -1;
   }
 }
 
 // ProcessHits =======================
-G4bool TrackerSD::ProcessHits(G4Step *step, G4TouchableHistory*){
+G4bool SiSD::ProcessHits(G4Step *step, G4TouchableHistory*){
   // energy deposit
   G4double edep = step -> GetTotalEnergyDeposit();
 
@@ -62,10 +62,9 @@ G4bool TrackerSD::ProcessHits(G4Step *step, G4TouchableHistory*){
   if( edep==0. && stpl ==0.) return false;
   
   //Get detector id
-  G4int detid = step->GetPreStepPoint()->GetTouchableHandle()
-    ->GetCopyNumber();
+  G4int detid = step->GetPreStepPoint()->GetTouchableHandle()->GetCopyNumber();
 
-  TrackHit *hit = (*fHitsCollection)[detid];
+  SiHit *hit = (*fHitsCollection)[detid];
   if(!hit){
     G4cerr << "Cannot access hit " << G4endl;
     exit(1);
@@ -91,13 +90,13 @@ G4bool TrackerSD::ProcessHits(G4Step *step, G4TouchableHistory*){
   return true;
 }
 
-void TrackerSD::EndOfEvent(G4HCofThisEvent*)
+void SiSD::EndOfEvent(G4HCofThisEvent*)
 {
   if(verboseLevel>1){
     G4int nofHits = fHitsCollection->entries();
     G4cout << "\n---------->Hits Collection: in this event they are "
 	   << nofHits
-	   << " hits in the Tracker :" << G4endl;
+	   << " hits in the Si :" << G4endl;
     for(G4int i=0;i<nofHits;i++){
       (*fHitsCollection)[i]->Print();
     }

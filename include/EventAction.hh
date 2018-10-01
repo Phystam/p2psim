@@ -15,6 +15,7 @@ class EventAction : public G4UserEventAction
 private:
   G4int fPrintModulo;
   G4int CalorCollectionID;
+  G4int SiCollectionID;
   G4int LaBrCollectionID;
   G4double resopara[100][2];
 

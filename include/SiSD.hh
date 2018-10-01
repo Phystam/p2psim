@@ -1,15 +1,15 @@
 // Definition of the CalorimeterSD class
 // 2012.10.16 Yasuhiro Togano
 // almost the copy of B4cCalorimeterSD.hh from Kobayashi-kun
-// Definition of the TrackerSD class
+// Definition of the SiSD class
 
 
 
-#ifndef TRACKERSD_H
-#define TRACKERSD_H 1
+#ifndef SISD_H
+#define SISD_H 1
 
 #include "G4VSensitiveDetector.hh"
-#include "CalorHit.hh" 
+#include "SiHit.hh" 
 
 #include <vector>
 
@@ -21,13 +21,13 @@
 // ProcessHits --> physics quantities like time, energy loss are accounted.
 //                 This function is called by G4 kernel at each step.
 
-class TrackerSD : public G4VSensitiveDetector
+class SiSD : public G4VSensitiveDetector
 {
 public:
-  TrackerSD(const G4String& name,
+  SiSD(const G4String& name,
 		const G4String& hitsCollectionName,
 		G4int nbofCells);
-  virtual ~TrackerSD();
+  virtual ~SiSD();
 
   //methods from base class
   virtual void Initialize(G4HCofThisEvent *hitCollection);
@@ -35,7 +35,7 @@ public:
   virtual void EndOfEvent(G4HCofThisEvent *hitCollection);
 
 private:
-  CalorHitsCollection *fHitsCollection;
+  SiHitsCollection *fHitsCollection;
   G4int fNbofCells;
   G4int* HitID;
 };
